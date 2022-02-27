@@ -1,19 +1,19 @@
 const validator = require("validator");
 
 module.exports = {
-  validate(userId, required) {
-    if (required) {
-      if (!userId) {
-        return {
-          error: "Parâmetro incorreto",
-        };
-      }
+  validate(userId) {
+    if (!userId) {
+      return {
+        error: "Parâmetro incorreto",
+        message: "É necessário informar um ID de usuário",
+      };
+    }
 
-      if (!validator.isDecimal(userId)) {
-        return {
-          error: "O ID informado não é valido",
-        };
-      }
+    if (!validator.isDecimal(userId)) {
+      return {
+        error: "O ID informado não é valido",
+        message: "O ID informado não é válido",
+      };
     }
     return {};
   },

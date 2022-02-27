@@ -12,9 +12,7 @@ module.exports = {
   async create(req, res) {
     try {
       // Aquisição dos parâmetros
-      const name = req.body["name"];
-      const email = req.body["email"];
-      const password = req.body["password"];
+      const { name, email, password } = req.body;
 
       // Validação dos parâmetros
       const validateName = NameValidator.validate(name);
@@ -81,34 +79,39 @@ module.exports = {
   async update(req, res) {
     try {
       // Extração dos parâmetros
-      const userId = req.body.id;
-      const name = req.body.name;
-      const email = req.body.email;
-      const password = req.body.password;
+      const { id, name, email, password } = req.body;
 
       // Validação dos parâmetros
-      const validateUserId = UserIdValidator.validate(userId, true);
-      const validateName = NameValidator.validate(name, false);
-      const validateEmail = EmailValidator.validate(email, false);
-      const validatePassword = PasswordValidator.validate(password, false);
+      const validateUserId = UserIdValidator.validate(id.toString());
+      const validateName = NameValidator.validate(name);
+      const validateEmail = EmailValidator.validate(email);
+      const validatePassword = PasswordValidator.validate(password);
 
+      // Para operação de update, ID é obrigatório e os demais parâmetros são opcionais
+      // Se os parâmetros opcionais existirem, então devem ser validados
       if (validateUserId.error) {
         return http.badRequest(res, validateUserId);
       }
 
-      if (validatePassword.error) {
-        return http.badRequest(res, validatePassword);
+      if (password) {
+        if (validatePassword.error) {
+          return http.badRequest(res, validatePassword);
+        }
       }
 
-      if (validateEmail.error) {
-        return http.badRequest(res, validateEmail);
+      if (email) {
+        if (validateEmail.error) {
+          return http.badRequest(res, validateEmail);
+        }
       }
 
-      if (validateName.error) {
-        return http.badRequest(res, validateName);
+      if (name) {
+        if (validateName.error) {
+          return http.badRequest(res, validateName);
+        }
       }
 
-      const response = await UserBusiness.update(userId, name, email, password);
+      const response = await UserBusiness.update(id, name, email, password);
       return http.generic(res, response);
     } catch (error) {
       console.log(filename, `Erro inesperado: ${error.message}`);
@@ -120,26 +123,11 @@ module.exports = {
 
   async delete(req, res) {
     try {
-      // Aquisição do token de autenticação
-      const token = req.headers["x-access-token"];
-
-      // Validação do token informado
-      const decoded = await AuthBusiness.verifyToken(token);
-
-      if (decoded["error"]) {
-        // Não foi possível validar o token
-        return http.unauthorized(res, {
-          message: decoded["error"],
-        });
-      }
-
       // Aquisição dos parâmetros
-      const userId = req.body["id"];
-      const email = req.body["email"];
-      const password = req.body["password"];
+      const { id, email, password } = req.body;
 
       // Validação dos parâmetros
-      const validateUserId = UserIdValidator.validate(userId);
+      const validateUserId = UserIdValidator.validate(id.toString());
       const validateEmail = EmailValidator.validate(email);
       const validatePassword = PasswordValidator.validate(password);
 
@@ -148,19 +136,14 @@ module.exports = {
       }
 
       if (validateEmail.error) {
-        return http.badRequest(res, validavalidateEmailteEmail);
+        return http.badRequest(res, validateEmail);
       }
 
       if (validatePassword.error) {
         return http.badRequest(res, validatePassword);
       }
 
-      const response = await UserBusiness.delete(
-        decoded,
-        userId,
-        email,
-        password
-      );
+      const response = await UserBusiness.delete(id, email, password);
 
       return http.generic(res, response);
     } catch (error) {

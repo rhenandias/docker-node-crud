@@ -1,5 +1,6 @@
 const validator = require("validator");
 const crypto = require("crypto");
+const { Op } = require("sequelize");
 
 const User = require("../models/user.model");
 
@@ -105,6 +106,7 @@ module.exports = {
 
   async update(userId, name, email, password) {
     try {
+      // Tenta adquirir dados atuais do ID de usuário que se deseja realizar o update
       const user = await User.findOne({
         where: {
           id: userId,
@@ -113,16 +115,66 @@ module.exports = {
       });
 
       if (user) {
-        // Atualiza os parâmetros passados
+        // Construir um novo objeto de usuário conforme os parâmetros passados
         if (name) user["name"] = userId;
-        if (email) user["email"] = userId;
 
+        // Caso seja desejado uma alteração de email, verificar disponibilidade
+        if (email) {
+          const isEmailUsed = await User.findOne({
+            where: {
+              id: {
+                [Op.ne]: userId,
+              },
+              email: email,
+            },
+            raw: true,
+          });
+
+          if (isEmailUsed) {
+            return http.ok(null, {
+              message:
+                "Não foi possível atualizar, o novo email já foi cadastrado por outro usuário",
+            });
+          }
+
+          user["email"] = userId;
+        }
+
+        // Para atualização da senha, executar hash MD5 na nova senha
         if (password) {
           password = crypto.createHash("md5").update(password).digest("hex");
           user["password"] = password;
         }
 
-        const updated = await User.update({});
+        // Realizar atualização
+        const rowsAffected = await User.update(
+          {
+            name,
+            email,
+            password,
+          },
+          {
+            where: {
+              id: userId,
+            },
+            raw: true,
+          }
+        );
+
+        if (rowsAffected) {
+          // Retornar o objeto que foi atualizaod
+          const updated = await User.findOne({
+            where: {
+              id: userId,
+            },
+            raw: true,
+          });
+          return http.ok(null, updated);
+        } else {
+          return http.failure(null, {
+            message: "Não foi possível atualizar os dados de usuário",
+          });
+        }
       } else {
         return http.ok(null, {
           message: "Nenhum usuário encontrado para o ID especificado",
@@ -139,12 +191,10 @@ module.exports = {
     }
   },
 
-  async delete(decoded, userId, email, password) {
+  async delete(userId, email, password) {
     try {
-      // Aplicar hash MD5 na senha, se necessário
-      if (!validator.isMD5(password)) {
-        password = crypto.createHash("md5").update(password).digest("hex");
-      }
+      // Aplicar hash MD5 na senha
+      password = crypto.createHash("md5").update(password).digest("hex");
 
       // Adquirir dados do usuário informado do banco de dados
       const user = await User.findOne({
@@ -157,37 +207,22 @@ module.exports = {
       });
 
       if (user) {
-        // Verifica veracidade dos dados
-        if (
-          user["id"] == decoded["userId"] &&
-          user["email"] == decoded["email"] &&
-          user["password"] == password
-        ) {
-          // Os dados informados são os mesmo que a conta que se deseja apagar
+        // Remover todos os dados de usuário
+        const deleted = await User.destroy({
+          where: {
+            id: userId,
+            email: email,
+          },
+        });
 
-          // Remover todos os dados de usuário (de todas as tabelas)
-          const deleted = await User.destroy({
-            where: {
-              id: userId,
-              email: email,
-            },
-          });
-
-          // Verifica sucesso da exclusão
-          if (deleted) {
-            return http.ok(null, {
-              message: "Conta de usuário removida com sucesso",
-            });
-          } else {
-            return http.failure({
-              message: "Não foi possível apagar a conta de usuário",
-            });
-          }
-        } else {
-          // Para essa situação acontecer, alguem precisaria conhecer o ID e email do usuário
-          // Pouco provável, mas possível de acontecer
+        // Verifica sucesso da exclusão
+        if (deleted) {
           return http.ok(null, {
-            message: "Esse usuário não tem permissão para remover essa conta.",
+            message: "Conta de usuário removida com sucesso",
+          });
+        } else {
+          return http.failure({
+            message: "Não foi possível apagar a conta de usuário",
           });
         }
       } else {
