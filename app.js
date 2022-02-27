@@ -4,6 +4,9 @@ const dotenv = require("dotenv");
 
 const sequelize = require("./src/modules/sequelize");
 
+const requireDir = require("require-dir");
+const dir = requireDir("./src/models/");
+
 dotenv.config({ path: ".env" });
 
 const app = express();
@@ -35,8 +38,18 @@ app.get("/", async (req, res) => {
 
 app.get("/api", (req, res) => {
   res.status(200).send({
-    message: "Docker Node.js CRUD",
+    message: "Docker Node.js CRUD aaaaa",
   });
 });
+
+(async () => {
+  try {
+    await sequelize.sync({ force: false });
+  } catch (error) {
+    console.log(
+      `Não foi possível sincronizar o Sequelize com o banco de dados: ${error.message}`
+    );
+  }
+})();
 
 module.exports = app;

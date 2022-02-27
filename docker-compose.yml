@@ -1,0 +1,22 @@
+services:
+  backend:
+    build: .
+    ports:
+      - "4005:4005"
+    environment:
+      - LOCAL_PORT=4005
+      - PG_DATABASE=$$$
+      - PG_USER=$$$
+      - PG_PASSWORD=$$$
+      - PG_HOST=postgres_database
+    depends_on:
+      - database
+  database:
+    container_name: postgres_database
+    image: "postgres"
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=$$$
+      - POSTGRES_PASSWORD=$$$
+      - POSTGRES_DB=$$$
