@@ -22,6 +22,26 @@ jobs:
     environment: docker-node-crud
 
     steps:
+    - name: Create env file - Root
+      run: |
+        touch ./.env
+        echo PORT=${{ secrets.PORT }} >> .env
+        echo DB_PORT=${{ secrets.secrets.DB_PORT }} >> .env
+        echo DB_DATABASE=${{ secrets.secrets.DB_DATABASE }} >> .env
+        echo DB_USER=${{ secrets.secrets.DB_USER }} >> .env
+        echo DB_PASSWORD=${{ secrets.secrets.DB_PASSWORD }} >> .env
+        cat .env
+        
+    - name: Create env file - Backend
+      run: |
+        touch ./backend/.env
+        echo PORT=${{ secrets.PORT }} >> .env
+        echo DB_PORT=${{ secrets.secrets.DB_PORT }} >> .env
+        echo DB_DATABASE=${{ secrets.secrets.DB_DATABASE }} >> .env
+        echo DB_USER=${{ secrets.secrets.DB_USER }} >> .env
+        echo DB_PASSWORD=${{ secrets.secrets.DB_PASSWORD }} >> .env
+        cat .env
+          
     - uses: actions/checkout@v2
     - name: Build the Docker image
       run: docker-compose up --build
