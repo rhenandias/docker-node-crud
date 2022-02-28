@@ -33,7 +33,6 @@ jobs:
         echo DB_DATABASE=${{ secrets.secrets.DB_DATABASE }} >> .env
         echo DB_USER=${{ secrets.secrets.DB_USER }} >> .env
         echo DB_PASSWORD=${{ secrets.secrets.DB_PASSWORD }} >> .env
-        cat .env
         
     - name: Create env file - Backend
       run: |
@@ -43,7 +42,6 @@ jobs:
         echo DB_DATABASE=${{ secrets.secrets.DB_DATABASE }} >> .env
         echo DB_USER=${{ secrets.secrets.DB_USER }} >> .env
         echo DB_PASSWORD=${{ secrets.secrets.DB_PASSWORD }} >> .env
-        cat .env
         
     - name: Build the Docker image
       run: docker-compose up --build
