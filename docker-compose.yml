@@ -1,7 +1,6 @@
 services:
   backend:
-    restart: always
-    env_file: ".env"
+    env_file: "./backend/.env"
     build: ./backend
     ports:
       - "${PORT}:${PORT}"
@@ -20,8 +19,7 @@ services:
     command: sh -c "/wait && node server.js"
   mysql:
     image: "mysql"
-    restart: always
-    env_file: ".env"
+    env_file: "./backend/.env"
     ports:
       - "3306:3306"
     expose:
