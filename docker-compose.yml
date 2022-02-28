@@ -2,12 +2,12 @@ services:
   backend:
     restart: always
     env_file: ".env"
-    build: .
+    build: ./backend
     ports:
-      - "${LOCAL_PORT}:${LOCAL_PORT}"
+      - "${PORT}:${PORT}"
     environment:
+      PORT: "${PORT}"
       DB_HOST: "mysql"
-      LOCAL_PORT: "${LOCAL_PORT}"
       DB_PORT: "${DB_PORT}"
       DB_DATABASE: "${DB_DATABASE}"
       DB_USER: "${DB_USER}"
