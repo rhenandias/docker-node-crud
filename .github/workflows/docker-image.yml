@@ -24,7 +24,7 @@ jobs:
     steps:
     - name: Create env file - Root
       run: |
-        touch ./.env
+        touch .env
         echo PORT=${{ secrets.PORT }} >> .env
         echo DB_PORT=${{ secrets.secrets.DB_PORT }} >> .env
         echo DB_DATABASE=${{ secrets.secrets.DB_DATABASE }} >> .env
@@ -34,7 +34,7 @@ jobs:
         
     - name: Create env file - Backend
       run: |
-        touch ./backend/.env
+        touch /backend/.env
         echo PORT=${{ secrets.PORT }} >> .env
         echo DB_PORT=${{ secrets.secrets.DB_PORT }} >> .env
         echo DB_DATABASE=${{ secrets.secrets.DB_DATABASE }} >> .env
