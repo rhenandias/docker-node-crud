@@ -40,13 +40,14 @@ app.get("/", async (req, res) => {
 
 app.get("/api", (req, res) => {
   res.status(200).send({
-    message: "Docker Node.js CRUD aaaaa",
+    message: "Docker Node.js CRUD",
   });
 });
 
 (async () => {
   try {
     await sequelize.sync({ force: false });
+    console.log("Conexão ao banco de dados realizada com sucesso");
   } catch (error) {
     console.log(
       `Não foi possível sincronizar o Sequelize com o banco de dados: ${error.message}`
