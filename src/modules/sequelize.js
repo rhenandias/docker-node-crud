@@ -1,13 +1,18 @@
 const Sequelize = require("sequelize");
-const dotenv = require("dotenv");
 
+const dotenv = require("dotenv");
 dotenv.config({ path: ".env" });
+
+console.log("Database Port:", process.env.DB_PORT);
+console.log("Database Name:", process.env.DB_DATABASE);
+console.log("User Name:", process.env.DB_USER);
+console.log("User Password:", process.env.DB_PASSWORD);
 
 // dbConfigurações para a conexão do Sequelize ao Banco de Dados
 const dbConfig = {
-  host: process.env.DB_HOST,
-  port: process.env.DB_PORT,
+  host: "mysql",
   dialect: "mysql",
+  port: process.env.DB_PORT,
   logging: false,
 };
 
@@ -15,7 +20,8 @@ const dbConfig = {
 const sequelize = new Sequelize(
   process.env.DB_DATABASE,
   process.env.DB_USER,
-  null,
+  process.env.DB_PASSWORD,
+  // null,
   dbConfig
 );
 

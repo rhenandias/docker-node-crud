@@ -1,22 +1,32 @@
 services:
   backend:
+    restart: always
+    env_file: ".env"
     build: .
     ports:
-      - "4005:4005"
+      - "${LOCAL_PORT}:${LOCAL_PORT}"
     environment:
-      - LOCAL_PORT=4005
-      - PG_DATABASE=$$$
-      - PG_USER=$$$
-      - PG_PASSWORD=$$$
-      - PG_HOST=postgres_database
+      DB_HOST: "mysql"
+      LOCAL_PORT: "${LOCAL_PORT}"
+      DB_PORT: "${DB_PORT}"
+      DB_DATABASE: "${DB_DATABASE}"
+      DB_USER: "${DB_USER}"
+      DB_PASSWORD: "${DB_PASSWORD}"
+      WAIT_HOSTS: mysql:3306
+      WAIT_TIMEOUT: 60
+      WAIT_SLEEP_INTERVAL: 10
     depends_on:
-      - database
-  database:
-    container_name: postgres_database
-    image: "postgres"
+      - mysql
+    command: sh -c "/wait && node server.js"
+  mysql:
+    image: "mysql"
+    restart: always
+    env_file: ".env"
     ports:
-      - "5432:5432"
+      - "3306:3306"
+    expose:
+      - 3306
     environment:
-      - POSTGRES_USER=$$$
-      - POSTGRES_PASSWORD=$$$
-      - POSTGRES_DB=$$$
+      MYSQL_ROOT_HOST: "%"
+      MYSQL_ROOT_PASSWORD: "${DB_PASSWORD}"
+      MYSQL_DATABASE: "${DB_DATABASE}"
