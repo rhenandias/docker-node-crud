@@ -57,25 +57,25 @@ Para executar o projeto, recomendo utilizar a versão da imagem montada para o D
 
 Clonar o repositório:
 
-```
+```bash
 $ git clone https://github.com/rhenandias/docker-node-crud.git
 ```
 
 Navegar para a pasta do projeto:
 
-```
+```bash
 $ cd docker-node-crud
 ```
 
 Criar o arquivo de variáveis de ambiente:
 
-```
+```bash
 $ touch .env
 ```
 
 O arquivo de variáveis de ambiente deve conter as seguintes definições (configurar de acordo com o desejado, ou manter os exemplos a seguir):
 
-```
+```bash
 # Configurar a porta desejada para a API
 PORT = 4005
 
@@ -94,7 +94,7 @@ DB_PASSWORD = 123456789
 
 Executar o Docker Composer:
 
-```
+```bash
 $ sudo docker-compose up --build
 ```
 
