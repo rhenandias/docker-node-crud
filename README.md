@@ -41,13 +41,8 @@ Para executar o projeto, recomendo utilizar a versão da imagem montada para o D
 
 ### Pré-requisitos
 
-- [Docker](https://www.docker.com/) (Docker Engine para o Linux, Docker Desktop para o Windows)
+- [Docker](https://www.docker.com/)
 - [Docker Compose](https://docs.docker.com/compose/gettingstarted/)
-
-### Instalação
-
-- [Instalando o Docker Engine no Linux](https://docs.docker.com/engine/install/ubuntu/)
-- [Instalando o Docker Compose no Linux](https://docs.docker.com/compose/install/)
 
 ### Clonando e Executando
 
