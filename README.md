@@ -10,11 +10,7 @@
     <a href="https://github.com/rhenandias/docker-node-crud/actions/workflows/docker-image.yml"  target="_blank">
       <img src="https://github.com/rhenandias/docker-node-crud/actions/workflows/docker-image.yml/badge.svg" />
     </a>
-    <!-- 
-    <a href="https://www.codacy.com/gh/Biblioteca-de-Bolso/backend/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Biblioteca-de-Bolso/backend&amp;utm_campaign=Badge_Grade" target="_blank">
-      <img src="https://app.codacy.com/project/badge/Grade/dd2736e4dd7c40748fa497dd6b63ba4f"/>
-    </a>
-    -->
+    <a href="https://www.codacy.com/gh/rhenandias/docker-node-crud/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=rhenandias/docker-node-crud&amp;utm_campaign=Badge_Grade"><img src="https://app.codacy.com/project/badge/Grade/d4c711bd71d2420a9c160f052125faf1"/></a>
     <!-- 
     <a href="https://www.codacy.com/gh/Biblioteca-de-Bolso/backend/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Biblioteca-de-Bolso/backend&amp;utm_campaign=Badge_Coverage" target="_blank">
       <img src="https://app.codacy.com/project/badge/Coverage/dd2736e4dd7c40748fa497dd6b63ba4f"/>
