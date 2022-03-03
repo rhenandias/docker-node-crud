@@ -23,8 +23,6 @@
     "express": "^4.17.3",
     "helmet": "^5.0.2",
     "mysql2": "^2.3.3",
-    "pg": "^8.7.3",
-    "pg-hstore": "^2.3.4",
     "require-dir": "^1.2.0",
     "sequelize": "^6.17.0",
     "validator": "^13.7.0"

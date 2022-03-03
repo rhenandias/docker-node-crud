@@ -1,4 +1,4 @@
-# docker-node-crud
+# docker-node-crud (Work In Progress)
 
 <p align="center">
     <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-plain-wordmark.svg" height="90">
@@ -10,26 +10,34 @@
     <a href="https://github.com/rhenandias/docker-node-crud/actions/workflows/docker-image.yml"  target="_blank">
       <img src="https://github.com/rhenandias/docker-node-crud/actions/workflows/docker-image.yml/badge.svg" />
     </a>
+    <!-- 
     <a href="https://www.codacy.com/gh/Biblioteca-de-Bolso/backend/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Biblioteca-de-Bolso/backend&amp;utm_campaign=Badge_Grade" target="_blank">
       <img src="https://app.codacy.com/project/badge/Grade/dd2736e4dd7c40748fa497dd6b63ba4f"/>
     </a>
+    -->
+    <!-- 
     <a href="https://www.codacy.com/gh/Biblioteca-de-Bolso/backend/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Biblioteca-de-Bolso/backend&amp;utm_campaign=Badge_Coverage" target="_blank">
       <img src="https://app.codacy.com/project/badge/Coverage/dd2736e4dd7c40748fa497dd6b63ba4f"/>
     </a>
+    -->
+    <!--
     <a href="https://documenter.getpostman.com/view/19545370/UVkmQGwd" target="_blank">
       <img src="https://img.shields.io/badge/Docs-Postman-f39f37" />
     </a>
+    -->
 </p>
 
-Este projeto foi desenvolvido com o intuito de aprender e colocar em prática a construção de um serviço de API utilizando o sistema de Container Docker. Foi construída uma API simples de CRUD utilizando Node.js e MySQL.
+Projeto desenvolvido com o intuito de aprender e colocar em prática a construção de um serviço de API utilizando o sistema de Container Docker. Foi construída uma API simples de CRUD utilizando Node.js e MySQL.
 
-## Tecnologias
+## Tecnologias e Frameworks
 
-- Docker
-- Node.JS
-- Express.js
-- MySQL
-- Jest
+- [Docker](https://www.docker.com/)
+- [Node.js](https://nodejs.org/en/)
+- [Express.js](https://expressjs.com/pt-br/)
+- [MySQL](https://www.mysql.com/)
+- [Sequelize](https://sequelize.org/)
+- [Jest](https://jestjs.io/pt-BR/)
+- [Github Actions](https://github.com/rhenandias/docker-node-crud/actions)
 
 ## Executando o Projeto
 
@@ -37,13 +45,13 @@ Para executar o projeto, recomendo utilizar a versão da imagem montada para o D
 
 ### Pré-requisitos
 
-- [Docker](https://www.docker.com/)
-- [Docker Composer](https://docs.docker.com/compose/gettingstarted/)
+- [Docker](https://www.docker.com/) (Docker Engine para o Linux, Docker Desktop para o Windows)
+- [Docker Compose](https://docs.docker.com/compose/gettingstarted/)
 
 ### Instalação
 
 - [Instalando o Docker Engine no Linux](https://docs.docker.com/engine/install/ubuntu/)
-- [Instalando o Docker Composer no Linux](https://docs.docker.com/compose/install/)
+- [Instalando o Docker Compose no Linux](https://docs.docker.com/compose/install/)
 
 ### Clonando e Executando
 
@@ -53,19 +61,19 @@ Clonar o repositório:
 $ git clone https://github.com/rhenandias/docker-node-crud.git
 ```
 
-Navegar para a pasta do projeto
+Navegar para a pasta do projeto:
 
 ```
 $ cd docker-node-crud
 ```
 
-Criar o arquivo de variáveis de ambiente
+Criar o arquivo de variáveis de ambiente:
 
 ```
 $ touch .env
 ```
 
-O arquivo de variáveis de ambiente deve conter as seguintes definições (configurar de acordo com o desejado, ou manter os exemplos a seguir)
+O arquivo de variáveis de ambiente deve conter as seguintes definições (configurar de acordo com o desejado, ou manter os exemplos a seguir):
 
 ```
 # Configurar a porta desejada para a API
@@ -82,11 +90,9 @@ DB_USER = root
 
 # Senha para o usuário do banco de dados
 DB_PASSWORD = 123456789
-
-
 ```
 
-Executar o Docker Composer
+Executar o Docker Composer:
 
 ```
 $ sudo docker-compose up --build
