@@ -1,30 +1,40 @@
 services:
   backend:
-    env_file: "./backend/.env"
+    restart: always
+    env_file: .env
     build: ./backend
     ports:
-      - "${PORT}:${PORT}"
+      - ${PORT}:${PORT}
     environment:
-      PORT: "${PORT}"
-      DB_HOST: "mysql"
-      DB_PORT: "${DB_PORT}"
-      DB_DATABASE: "${DB_DATABASE}"
-      DB_USER: "${DB_USER}"
-      DB_PASSWORD: "${DB_PASSWORD}"
+      PORT: ${PORT}
+      DB_HOST: mysql
+      DB_PORT: ${DB_PORT}
+      DB_DATABASE: ${DB_DATABASE}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
       WAIT_HOSTS: mysql:3306
-      WAIT_TIMEOUT: 60
+      WAIT_TIMEOUT: 600
       WAIT_SLEEP_INTERVAL: 10
+    links:
+      - mysql
     depends_on:
       - mysql
-    command: sh -c "/wait && node server.js"
+    command: sh -c "/wait && npm run server"
+    volumes:
+      - ./backend:/src/
+      - node_modules:/src/node_modules
   mysql:
-    image: "mysql"
-    env_file: "./backend/.env"
+    image: mysql
+    restart: always
+    env_file: .env
     ports:
-      - "3306:3306"
+      - 3306:3306
     expose:
       - 3306
     environment:
       MYSQL_ROOT_HOST: "%"
-      MYSQL_ROOT_PASSWORD: "${DB_PASSWORD}"
-      MYSQL_DATABASE: "${DB_DATABASE}"
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_DATABASE}
+
+volumes:
+  nodemodules: {}
