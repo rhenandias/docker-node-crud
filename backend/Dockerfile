@@ -14,4 +14,3 @@ COPY . .
 
 EXPOSE 4005
 
-CMD ["npm", "run", "server"]

@@ -21,8 +21,8 @@ services:
       - mysql
     command: sh -c "/wait && npm run server"
     volumes:
-      - ./backend:/src/
-      - node_modules:/src/node_modules
+      - ./backend:/usr/src/backend
+      - ./backend/node_modules:/usr/src/backend/node_modules
   mysql:
     image: mysql
     restart: always
@@ -35,6 +35,3 @@ services:
       MYSQL_ROOT_HOST: "%"
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
       MYSQL_DATABASE: ${DB_DATABASE}
-
-volumes:
-  nodemodules: {}

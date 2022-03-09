@@ -8,6 +8,8 @@ const sequelize = require("./src/modules/sequelize");
 const requireDir = require("require-dir");
 const modelsDir = requireDir("./src/models/");
 
+const customErrorHandler = require("./src/modules/error");
+
 const app = express();
 
 app.use(cors());
@@ -32,7 +34,7 @@ app.get("/connection", async (req, res) => {
 
 app.get("/", async (req, res) => {
   res.status(200).send({
-    message: "Docker Node.js CRUD aaa",
+    message: "Docker Node.js CRUD",
   });
 });
 
