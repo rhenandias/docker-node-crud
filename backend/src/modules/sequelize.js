@@ -1,8 +1,5 @@
 const Sequelize = require("sequelize");
 
-const dotenv = require("dotenv");
-dotenv.config({ path: ".env" });
-
 console.log("Database Port:", process.env.DB_PORT);
 console.log("Database Name:", process.env.DB_DATABASE);
 console.log("User Name:", process.env.DB_USER);

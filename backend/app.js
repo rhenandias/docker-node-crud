@@ -1,14 +1,12 @@
 const express = require("express");
 const cors = require("cors");
-const dotenv = require("dotenv");
+const dotenv = require("dotenv").config({ path: "../.env" });
 const helmet = require("helmet");
 
 const sequelize = require("./src/modules/sequelize");
 
 const requireDir = require("require-dir");
-const dir = requireDir("./src/models/");
-
-dotenv.config({ path: ".env" });
+const modelsDir = requireDir("./src/models/");
 
 const app = express();
 
@@ -34,19 +32,20 @@ app.get("/connection", async (req, res) => {
 
 app.get("/", async (req, res) => {
   res.status(200).send({
-    message: "Docker Node.js CRUD",
+    message: "Docker Node.js CRUD aaa",
   });
 });
 
 app.get("/api", (req, res) => {
   res.status(200).send({
-    message: "Docker Node.js CRUD aaaaa",
+    message: "Docker Node.js CRUD",
   });
 });
 
 (async () => {
   try {
     await sequelize.sync({ force: false });
+    console.log("Conexão ao banco de dados realizada com sucesso");
   } catch (error) {
     console.log(
       `Não foi possível sincronizar o Sequelize com o banco de dados: ${error.message}`
