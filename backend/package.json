@@ -26,11 +26,11 @@
     "mysql2": "^2.3.3",
     "require-dir": "^1.2.0",
     "sequelize": "^6.17.0",
-    "validator": "^13.7.0",
-    "jest": "^27.5.1",
-    "supertest": "^6.2.2"
+    "validator": "^13.7.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "jest": "^27.5.1",
+    "supertest": "^6.2.2"
   }
 }
