@@ -19,18 +19,8 @@ jobs:
     runs-on: ubuntu-latest
     environment: docker-node-crud
 
-    strategy:
-      matrix:
-        node-version: [16.x]
-
     steps:
       - uses: actions/checkout@v2
-
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: "npm"
 
       - name: Create env file - Root
         run: |
@@ -41,5 +31,5 @@ jobs:
           echo DB_USER=${{ secrets.secrets.DB_USER }} >> .env
           echo DB_PASSWORD=${{ secrets.secrets.DB_PASSWORD }} >> .env
 
-      - name: Build the Docker image (test image)
+      - name: Build the Docker test image
         run: docker-compose -f docker-compose.test.yml up --exit-code-from backend --build
