@@ -3,9 +3,9 @@ name: Docker Image CI
 on:
   workflow_dispatch:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 env:
   PORT: ${{ secrets.PORT }}
@@ -13,35 +13,23 @@ env:
   DB_DATABASE: ${{ secrets.DB_DATABASE }}
   DB_USER: ${{ secrets.DB_USER }}
   DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
-  
+
 jobs:
-
   build:
-
     runs-on: ubuntu-latest
     environment: docker-node-crud
 
     steps:
-    
-    - uses: actions/checkout@v2
-    
-    - name: Create env file - Root
-      run: |
-        touch ./.env
-        echo PORT=${{ secrets.PORT }} >> .env
-        echo DB_PORT=${{ secrets.secrets.DB_PORT }} >> .env
-        echo DB_DATABASE=${{ secrets.secrets.DB_DATABASE }} >> .env
-        echo DB_USER=${{ secrets.secrets.DB_USER }} >> .env
-        echo DB_PASSWORD=${{ secrets.secrets.DB_PASSWORD }} >> .env
-        
-    - name: Create env file - Backend
-      run: |
-        touch ./backend/.env
-        echo PORT=${{ secrets.PORT }} >> .env
-        echo DB_PORT=${{ secrets.secrets.DB_PORT }} >> .env
-        echo DB_DATABASE=${{ secrets.secrets.DB_DATABASE }} >> .env
-        echo DB_USER=${{ secrets.secrets.DB_USER }} >> .env
-        echo DB_PASSWORD=${{ secrets.secrets.DB_PASSWORD }} >> .env
-        
-    - name: Build the Docker image
-      run: docker-compose up --build
+      - uses: actions/checkout@v2
+
+      - name: Create env file - Root
+        run: |
+          touch ./.env
+          echo PORT=${{ secrets.PORT }} >> .env
+          echo DB_PORT=${{ secrets.secrets.DB_PORT }} >> .env
+          echo DB_DATABASE=${{ secrets.secrets.DB_DATABASE }} >> .env
+          echo DB_USER=${{ secrets.secrets.DB_USER }} >> .env
+          echo DB_PASSWORD=${{ secrets.secrets.DB_PASSWORD }} >> .env
+
+      - name: Build the Docker image (test image)
+        run: docker-compose -f docker-compose.test.yml up --exit-code-from backend --build
