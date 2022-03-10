@@ -13,6 +13,7 @@ env:
   DB_DATABASE: ${{ secrets.DB_DATABASE }}
   DB_USER: ${{ secrets.DB_USER }}
   DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+  CODACY_PROJECT_TOKEN: ${{ secrets.CODACY_PROJECT_TOKEN }}
 
 jobs:
   build:
@@ -33,3 +34,9 @@ jobs:
 
       - name: Build the Docker test image
         run: docker-compose -f docker-compose.test.yml up --exit-code-from backend --build
+
+      - name: Run codacy-coverage-reporter
+        uses: codacy/codacy-coverage-reporter-action@v1
+        with:
+          project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
+          coverage-reports: ./backend/coverage/clover.xml

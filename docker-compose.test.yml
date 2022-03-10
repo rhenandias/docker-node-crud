@@ -18,6 +18,8 @@ services:
     depends_on:
       - mysql
     command: sh -c "/wait && npm run test-coverage"
+    volumes:
+      - ./backend/coverage:/usr/src/backend/coverage
   mysql:
     image: mysql
     env_file: .env

@@ -37,6 +37,8 @@ Projeto desenvolvido com o intuito de aprender e colocar em prática a construç
 
 ## Executando o Projeto
 
+> Instruções de execução considerando um sistema Linux, verificar os comandos equivalentes para outras plataformas.
+
 Para executar o projeto, recomendo utilizar a versão da imagem montada para o Docker, assim, não há necessidade de ter instalado nenhuma ferramenta como Node.js ou MySQL, nem configurar uma instância de banco de dados.
 
 ### Pré-requisitos
@@ -103,3 +105,5 @@ Para executar o container com os testes:
 sudo docker-compose -f docker-compose.test.yml up --exit-code-from backend --build
 
 ```
+
+> Work in Progress: Construir testes reais para as funcionalidades do sistema e
