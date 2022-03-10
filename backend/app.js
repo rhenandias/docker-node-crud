@@ -44,15 +44,17 @@ app.get("/api", (req, res) => {
   });
 });
 
-(async () => {
-  try {
-    await sequelize.sync({ force: false });
-    console.log("Conexão ao banco de dados realizada com sucesso");
-  } catch (error) {
-    console.log(
-      `Não foi possível sincronizar o Sequelize com o banco de dados: ${error.message}`
-    );
-  }
-})();
+if (process.env.NODE_ENV != "test") {
+  (async () => {
+    try {
+      await sequelize.sync({ force: false });
+      console.log("Conexão ao banco de dados realizada com sucesso");
+    } catch (error) {
+      console.log(
+        `Não foi possível sincronizar o Sequelize com o banco de dados: ${error.message}`
+      );
+    }
+  })();
+}
 
 module.exports = app;

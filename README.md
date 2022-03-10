@@ -10,11 +10,7 @@
     <a href="https://github.com/rhenandias/docker-node-crud/actions/workflows/docker-image.yml"  target="_blank">
       <img src="https://github.com/rhenandias/docker-node-crud/actions/workflows/docker-image.yml/badge.svg" />
     </a>
-    <!-- 
-    <a href="https://www.codacy.com/gh/Biblioteca-de-Bolso/backend/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Biblioteca-de-Bolso/backend&amp;utm_campaign=Badge_Grade" target="_blank">
-      <img src="https://app.codacy.com/project/badge/Grade/dd2736e4dd7c40748fa497dd6b63ba4f"/>
-    </a>
-    -->
+    <a href="https://www.codacy.com/gh/rhenandias/docker-node-crud/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=rhenandias/docker-node-crud&amp;utm_campaign=Badge_Grade"><img src="https://app.codacy.com/project/badge/Grade/d4c711bd71d2420a9c160f052125faf1"/></a>
     <!-- 
     <a href="https://www.codacy.com/gh/Biblioteca-de-Bolso/backend/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Biblioteca-de-Bolso/backend&amp;utm_campaign=Badge_Coverage" target="_blank">
       <img src="https://app.codacy.com/project/badge/Coverage/dd2736e4dd7c40748fa497dd6b63ba4f"/>
@@ -45,32 +41,27 @@ Para executar o projeto, recomendo utilizar a versão da imagem montada para o D
 
 ### Pré-requisitos
 
-- [Docker](https://www.docker.com/) (Docker Engine para o Linux, Docker Desktop para o Windows)
+- [Docker](https://www.docker.com/)
 - [Docker Compose](https://docs.docker.com/compose/gettingstarted/)
-
-### Instalação
-
-- [Instalando o Docker Engine no Linux](https://docs.docker.com/engine/install/ubuntu/)
-- [Instalando o Docker Compose no Linux](https://docs.docker.com/compose/install/)
 
 ### Clonando e Executando
 
 Clonar o repositório:
 
 ```bash
-$ git clone https://github.com/rhenandias/docker-node-crud.git
+git clone https://github.com/rhenandias/docker-node-crud.git
 ```
 
 Navegar para a pasta do projeto:
 
 ```bash
-$ cd docker-node-crud
+cd docker-node-crud
 ```
 
 Criar o arquivo de variáveis de ambiente:
 
 ```bash
-$ touch .env
+touch .env
 ```
 
 O arquivo de variáveis de ambiente deve conter as seguintes definições (configurar de acordo com o desejado, ou manter os exemplos a seguir):
@@ -95,7 +86,7 @@ DB_PASSWORD = 123456789
 Executar o Docker Composer:
 
 ```bash
-$ sudo docker-compose up --build
+sudo docker-compose up --build
 ```
 
 ## Documentação
@@ -104,4 +95,11 @@ work in progress
 
 ## Testes
 
-work in progess
+Os containers de teste são containers isolados no arquivo `docker-compose.test.yml` enquanto que a versão de operação é executada através do arquivo `docker-compose.yml`.
+
+Para executar o container com os testes:
+
+```bash
+sudo docker-compose -f docker-compose.test.yml up --exit-code-from backend --build
+
+```
