@@ -6,10 +6,9 @@ const UserIdValidator = require("../validators/user_id.validator");
 const UserBusiness = require("../business/user.business");
 
 const http = require("../modules/http");
-const filename = __filename.slice(__dirname.length + 1) + " -";
 
 module.exports = {
-  async create(req, res) {
+  async create(req, res, next) {
     try {
       // Aquisição dos parâmetros
       const { name, email, password } = req.body;
@@ -37,25 +36,20 @@ module.exports = {
       // Retorna o resultado da operação
       return http.generic(res, response);
     } catch (error) {
-      console.log(filename, `Erro inesperado: ${error.message}`);
-      return http.failure(res, {
-        message: `Erro inesperado: ${error.message}`,
-      });
+      next(error);
     }
   },
 
-  async list(req, res) {
+  async list(req, res, next) {
     try {
       const response = await UserBusiness.list();
       return http.generic(res, response);
     } catch (error) {
-      return http.failure({
-        message: `Erro inesperado: ${error.message}`,
-      });
+      next(error);
     }
   },
 
-  async read(req, res) {
+  async read(req, res, next) {
     try {
       // Validação dos parâmetros
       const userId = req.params.id;
@@ -69,14 +63,11 @@ module.exports = {
       const response = await UserBusiness.read(userId);
       return http.generic(res, response);
     } catch (error) {
-      console.log(filename, `Erro inesperado: ${error.message}`);
-      return http.failure(res, {
-        message: `Erro inesperado: ${error.message}`,
-      });
+      next(error);
     }
   },
 
-  async update(req, res) {
+  async update(req, res, next) {
     try {
       // Extração dos parâmetros
       const { id, name, email, password } = req.body;
@@ -114,14 +105,11 @@ module.exports = {
       const response = await UserBusiness.update(id, name, email, password);
       return http.generic(res, response);
     } catch (error) {
-      console.log(filename, `Erro inesperado: ${error.message}`);
-      return http.failure(res, {
-        message: `Erro inesperado: ${error.message}`,
-      });
+      next(error);
     }
   },
 
-  async delete(req, res) {
+  async delete(req, res, next) {
     try {
       // Aquisição dos parâmetros
       const { id, email, password } = req.body;
@@ -147,10 +135,7 @@ module.exports = {
 
       return http.generic(res, response);
     } catch (error) {
-      console.log(filename, `Erro inesperado: ${error.message}`);
-      return http.failure(res, {
-        message: `Erro inesperado: ${error.message}`,
-      });
+      next(error);
     }
   },
 };

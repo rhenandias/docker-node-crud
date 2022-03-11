@@ -18,6 +18,8 @@ app.use(helmet());
 
 app.use("/api", require("./src/routes"));
 
+app.use(customErrorHandler);
+
 app.get("/connection", async (req, res) => {
   try {
     await sequelize.authenticate();

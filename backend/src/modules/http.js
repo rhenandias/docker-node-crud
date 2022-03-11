@@ -79,4 +79,15 @@ module.exports = {
       };
     }
   },
+
+  conflict(res, body) {
+    if (res) {
+      return res.status(409).json(body);
+    } else {
+      return {
+        statusCode: 409,
+        body: body,
+      };
+    }
+  },
 };

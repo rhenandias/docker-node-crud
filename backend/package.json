@@ -5,8 +5,15 @@
   "main": "server.js",
   "scripts": {
     "test": "jest",
-    "test-coverage": "jest --coverage",
+    "test-coverage": "jest --coverage --colors",
     "server": "nodemon -L server.js"
+  },
+  "jest": {
+    "coverageReporters": [
+      "clover",
+      "json",
+      "lcov"
+    ]
   },
   "repository": {
     "type": "git",

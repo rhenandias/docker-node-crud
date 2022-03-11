@@ -11,11 +11,9 @@
       <img src="https://github.com/rhenandias/docker-node-crud/actions/workflows/docker-image.yml/badge.svg" />
     </a>
     <a href="https://www.codacy.com/gh/rhenandias/docker-node-crud/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=rhenandias/docker-node-crud&amp;utm_campaign=Badge_Grade"><img src="https://app.codacy.com/project/badge/Grade/d4c711bd71d2420a9c160f052125faf1"/></a>
-    <!-- 
-    <a href="https://www.codacy.com/gh/Biblioteca-de-Bolso/backend/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Biblioteca-de-Bolso/backend&amp;utm_campaign=Badge_Coverage" target="_blank">
-      <img src="https://app.codacy.com/project/badge/Coverage/dd2736e4dd7c40748fa497dd6b63ba4f"/>
+    <a href="https://www.codacy.com/gh/rhenandias/docker-node-crud/dashboard?utm_source=github.com&utm_medium=referral&utm_content=rhenandias/docker-node-crud&utm_campaign=Badge_Coverage" target="_blank">
+      <img src="https://app.codacy.com/project/badge/Coverage/d4c711bd71d2420a9c160f052125faf1"/>
     </a>
-    -->
     <!--
     <a href="https://documenter.getpostman.com/view/19545370/UVkmQGwd" target="_blank">
       <img src="https://img.shields.io/badge/Docs-Postman-f39f37" />
@@ -106,4 +104,4 @@ sudo docker-compose -f docker-compose.test.yml up --exit-code-from backend --bui
 
 ```
 
-> Work in Progress: Construir testes reais para as funcionalidades do sistema e
+> Work in Progress: Construir testes reais para as funcionalidades do sistema
