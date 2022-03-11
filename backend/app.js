@@ -8,6 +8,8 @@ const sequelize = require("./src/modules/sequelize");
 const requireDir = require("require-dir");
 const modelsDir = requireDir("./src/models/");
 
+const customErrorHandler = require("./src/modules/error");
+
 const app = express();
 
 app.use(cors());
@@ -32,7 +34,7 @@ app.get("/connection", async (req, res) => {
 
 app.get("/", async (req, res) => {
   res.status(200).send({
-    message: "Docker Node.js CRUD aaa",
+    message: "Docker Node.js CRUD",
   });
 });
 
@@ -42,15 +44,17 @@ app.get("/api", (req, res) => {
   });
 });
 
-(async () => {
-  try {
-    await sequelize.sync({ force: false });
-    console.log("Conexão ao banco de dados realizada com sucesso");
-  } catch (error) {
-    console.log(
-      `Não foi possível sincronizar o Sequelize com o banco de dados: ${error.message}`
-    );
-  }
-})();
+if (process.env.NODE_ENV != "test") {
+  (async () => {
+    try {
+      await sequelize.sync({ force: false });
+      console.log("Conexão ao banco de dados realizada com sucesso");
+    } catch (error) {
+      console.log(
+        `Não foi possível sincronizar o Sequelize com o banco de dados: ${error.message}`
+      );
+    }
+  })();
+}
 
 module.exports = app;

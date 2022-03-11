@@ -1,9 +1,11 @@
 const Sequelize = require("sequelize");
 
-console.log("Database Port:", process.env.DB_PORT);
-console.log("Database Name:", process.env.DB_DATABASE);
-console.log("User Name:", process.env.DB_USER);
-console.log("User Password:", process.env.DB_PASSWORD);
+if (process.env.NODE_ENV != "test") {
+  console.log("Database Port:", process.env.DB_PORT);
+  console.log("Database Name:", process.env.DB_DATABASE);
+  console.log("User Name:", process.env.DB_USER);
+  console.log("User Password:", process.env.DB_PASSWORD);
+}
 
 // dbConfigurações para a conexão do Sequelize ao Banco de Dados
 const dbConfig = {
